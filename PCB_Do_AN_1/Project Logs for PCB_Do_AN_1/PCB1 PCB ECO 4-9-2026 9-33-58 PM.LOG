@@ -1,0 +1,6 @@
+Removed Pin From Net: NetName=NetJ0_2 Pin=P1-5
+Change Component Footprint: Designator=J0 Old Footprint=HDR1X2 New Footprint=HDR1X3
+Added Pin To Net: NetName=NetJ0_2 Pin=P1-2
+Added Pin To Net: NetName=NetJ0_3 Pin=J0-3
+Added Pin To Net: NetName=NetJ0_3 Pin=P1-5
+Added Net: Name=NetJ0_3
