@@ -75,4 +75,25 @@ Hệ thống sử dụng Google Sheets làm cơ sở dữ liệu miễn phí và
    String BOT_TOKEN = "Dán_Token_Telegram_Bot_của_bạn_vào_đây";
    String CHAT_ID = "Dán_Chat_ID_của_bạn_vào_đây";
    ```
-   
+5. Kết nối ESP32 với máy tính qua cáp Type-C và bấm Upload.
+
+## 🚀 Hướng dẫn Sử dụng Hệ thống
+
+Bước 1: Cấu hình mạng Wi-Fi (Captive Portal)
+   * Cấp nguồn cho thiết bị. Nếu mạch chưa có thông tin Wi-Fi, nó sẽ tự động phát ra một mạng Wi-Fi có tên là `IoT_Smart_Pillbox`.
+   * Dùng điện thoại kết nối vào mạng Wi-Fi này. Một trang đăng nhập sẽ tự động hiện ra (Captive Portal). Bạn chỉ cần chọn mạng Wi-Fi nhà mình, nhập mật khẩu và bấm Save. Thiết bị sẽ tự khởi động lại và online.
+Bước 2: Cài đặt lịch trình qua Web Dashboard
+  * Truy cập vào đường dẫn Web App (từ bước triển khai Apps Script) bằng điện thoại hoặc máy tính.
+  * Tại đây, người quản lý có thể cập nhật các cữ thuốc, xem lịch sử đóng/mở nắp và kiểm tra thống kê tuân thủ.
+
+> **📸 Giao diện Trang quản trị Web:**
+> 
+> ![Giao diện trang web](thay_link_anh_giao_dien_web_cua_ban_vao_day.jpg)
+
+Bước 3: Nhận thông báo qua Telegram
+  * Khi đến giờ, hộp thuốc sẽ phát tiếng bíp và sáng màn hình.
+  * Khi người bệnh mở nắp đúng giờ hoặc sai giờ, tin nhắn cảnh báo sẽ ngay lập tức được đẩy về ứng dụng Telegram của người nhà.
+
+> **📸 Thông báo Telegram Bot:**
+> 
+> ![Thông báo Telegram](thay_link_anh_thong_bao_telegram_cua_ban_vao_day.jpg)
