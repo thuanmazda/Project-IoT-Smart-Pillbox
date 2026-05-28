@@ -92,7 +92,7 @@ Bước 2: Cài đặt lịch trình qua Web Dashboard
 
 > **📸 Giao diện Trang quản trị Web:**
 > 
-> ![Giao diện trang web](Docs/Source_Code_LaTeX/dashboard_timeline.png)
+> ![Giao diện trang web]()
 
 Bước 3: Nhận thông báo qua Telegram
   * Khi đến giờ, hộp thuốc sẽ phát tiếng bíp và sáng màn hình.
