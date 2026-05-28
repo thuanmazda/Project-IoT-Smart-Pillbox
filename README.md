@@ -32,9 +32,11 @@ IoT-Smart-Pillbox/
 ├── 📁 Hardware/
 │   ├── 📄 Schematic_Altium.pdf       # File PDF bản vẽ sơ đồ nguyên lý
 │   └── 📄 BOM.csv                    # Bảng danh mục vật tư (Bill of Materials)
+│   └── 📁 Altium PCB Project         # Thư mục chứa toàn bộ dự án thiết kế PCB bằng Altium
 ├── 📁 Docs/
-│   └── 📄 BAO_CAO_DO_AN_1.pdf        # Báo cáo thuyết minh chi tiết của đồ án
-└── 📄 README.md                      # Tài liệu hướng dẫn dự án (File này)
+│   ├── 📄 BAO_CAO_DO_AN_1.pdf        # File báo cáo chi tiết của đề tài
+│   └── 📁 Source_Code_LaTeX          # Source Code LaTeX của bài báo cáo 
+└── 📄 README.md                      # Tài liệu hướng dẫn của đề tài
 
 ```
 ## 🛠️ Cài đặt & Triển khai hệ thống
