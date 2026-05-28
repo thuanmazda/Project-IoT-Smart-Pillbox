@@ -48,7 +48,7 @@ IoT-Smart-Pillbox/
 
 > **📸 Hình ảnh mạch thực tế:**
 > 
-> ![Mô hình hoàn thiện](thay_link_anh_mach_thuc_te_cua_ban_vao_day.jpg)
+> ![Mô hình hoàn thiện](Docs/Source_Code_LaTeX/mo_hinh_mat_truoc.jpg)
 
 ---
 
@@ -74,16 +74,16 @@ Hệ thống sử dụng Google Sheets làm cơ sở dữ liệu miễn phí và
 3. Mở file `Firmware/ESP32_Pillbox.ino`.
 4. Tìm đến vùng cấu hình và thay thế các thông số sau bằng thông tin của bạn:
    ```cpp
-   String GAS_URL = "Dán_Web_App_URL_của_bạn_vào_đây";
-   String BOT_TOKEN = "Dán_Token_Telegram_Bot_của_bạn_vào_đây";
-   String CHAT_ID = "Dán_Chat_ID_của_bạn_vào_đây";
+   String googleScriptUrl = "Dán_Web_App_URL_của_bạn_vào_đây";
+   String botToken = "Dán_Token_Telegram_Bot_của_bạn_vào_đây";
+   String chatId = "Dán_Chat_ID_của_bạn_vào_đây";
    ```
 5. Kết nối ESP32 với máy tính qua cáp Type-C và bấm Upload.
 
 ## 🚀 Hướng dẫn Sử dụng Hệ thống
 
 Bước 1: Cấu hình mạng Wi-Fi (Captive Portal)
-   * Cấp nguồn cho thiết bị. Nếu mạch chưa có thông tin Wi-Fi, nó sẽ tự động phát ra một mạng Wi-Fi có tên là `IoT_Smart_Pillbox`.
+   * Cấp nguồn cho thiết bị. Nếu mạch chưa có thông tin Wi-Fi, nó sẽ tự động phát ra một mạng Wi-Fi có tên là `Hop_thuoc_IoT`.
    * Dùng điện thoại kết nối vào mạng Wi-Fi này. Một trang đăng nhập sẽ tự động hiện ra (Captive Portal). Bạn chỉ cần chọn mạng Wi-Fi nhà mình, nhập mật khẩu và bấm Save. Thiết bị sẽ tự khởi động lại và online.
 
 Bước 2: Cài đặt lịch trình qua Web Dashboard
@@ -92,7 +92,7 @@ Bước 2: Cài đặt lịch trình qua Web Dashboard
 
 > **📸 Giao diện Trang quản trị Web:**
 > 
-> ![Giao diện trang web](thay_link_anh_giao_dien_web_cua_ban_vao_day.jpg)
+> ![Giao diện trang web](Docs/Source_Code_LaTeX/dashboard_timeline.png)
 
 Bước 3: Nhận thông báo qua Telegram
   * Khi đến giờ, hộp thuốc sẽ phát tiếng bíp và sáng màn hình.
@@ -100,7 +100,7 @@ Bước 3: Nhận thông báo qua Telegram
 
 > **📸 Thông báo Telegram Bot:**
 > 
-> ![Thông báo Telegram](thay_link_anh_thong_bao_telegram_cua_ban_vao_day.jpg)
+> ![Thông báo Telegram](Docs/Source_Code_LaTeX/test_uong_dung_gio1.png)
 
 ---
 
