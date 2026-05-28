@@ -98,3 +98,12 @@ Bước 3: Nhận thông báo qua Telegram
 > **📸 Thông báo Telegram Bot:**
 > 
 > ![Thông báo Telegram](thay_link_anh_thong_bao_telegram_cua_ban_vao_day.jpg)
+
+---
+
+## 📄 Bản quyền và Cấp phép (Credits & License)
+
+Dự án này là sản phẩm thuộc **Đồ án môn học 1 (EE3183)**. 
+Bản quyền mã nguồn, tài liệu và thiết kế cơ khí thuộc về chủ sở hữu (**Nguyễn Minh Thuận**) và **Khoa Điện - Điện tử, Trường Đại học Bách Khoa - ĐHQG TP.HCM**. 
+
+*Vui lòng trích dẫn nguồn đầy đủ và tôn trọng quyền tác giả nếu bạn tham khảo hoặc sử dụng lại các tài liệu từ kho lưu trữ này cho mục đích học tập.*
