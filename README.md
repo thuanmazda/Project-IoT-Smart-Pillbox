@@ -82,6 +82,7 @@ Hệ thống sử dụng Google Sheets làm cơ sở dữ liệu miễn phí và
 Bước 1: Cấu hình mạng Wi-Fi (Captive Portal)
    * Cấp nguồn cho thiết bị. Nếu mạch chưa có thông tin Wi-Fi, nó sẽ tự động phát ra một mạng Wi-Fi có tên là `IoT_Smart_Pillbox`.
    * Dùng điện thoại kết nối vào mạng Wi-Fi này. Một trang đăng nhập sẽ tự động hiện ra (Captive Portal). Bạn chỉ cần chọn mạng Wi-Fi nhà mình, nhập mật khẩu và bấm Save. Thiết bị sẽ tự khởi động lại và online.
+
 Bước 2: Cài đặt lịch trình qua Web Dashboard
   * Truy cập vào đường dẫn Web App (từ bước triển khai Apps Script) bằng điện thoại hoặc máy tính.
   * Tại đây, người quản lý có thể cập nhật các cữ thuốc, xem lịch sử đóng/mở nắp và kiểm tra thống kê tuân thủ.
