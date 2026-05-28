@@ -25,7 +25,8 @@
 ```text
 IoT-Smart-Pillbox/
 ├── 📁 Firmware/
-│   └── 📄 ESP32_Pillbox.ino          # Mã nguồn C++ nạp cho vi điều khiển ESP32
+│   └── 📄 ESP32_Pillbox.ino          # Mã nguồn C++ nạp cho vi điều khiển ESP32 (File đọc Arduino IDE)
+│   └── 📄 ESP32_Pillbox.cpp          # Mã nguồn C++ nạp cho vi điều khiển ESP32 (File chuẩn hoá định dạng code C++)
 ├── 📁 Web_App_Script/
 │   ├── 📄 Code.gs                    # Mã nguồn Backend (Google Apps Script)
 │   └── 📄 Index.html                 # Giao diện Web quản lý (Frontend)
