@@ -74,9 +74,9 @@ Hệ thống sử dụng Google Sheets làm cơ sở dữ liệu miễn phí và
 3. Mở file `Firmware/ESP32_Pillbox.ino`.
 4. Tìm đến vùng cấu hình và thay thế các thông số sau bằng thông tin của bạn:
    ```cpp
-   String GAS_URL = "Dán_Web_App_URL_của_bạn_vào_đây";
-   String BOT_TOKEN = "Dán_Token_Telegram_Bot_của_bạn_vào_đây";
-   String CHAT_ID = "Dán_Chat_ID_của_bạn_vào_đây";
+   String googleScriptUrl = "Dán_Web_App_URL_của_bạn_vào_đây";
+   String botToken = "Dán_Token_Telegram_Bot_của_bạn_vào_đây";
+   String chatId = "Dán_Chat_ID_của_bạn_vào_đây";
    ```
 5. Kết nối ESP32 với máy tính qua cáp Type-C và bấm Upload.
 
