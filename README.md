@@ -56,11 +56,12 @@ IoT-Smart-Pillbox/
 Hệ thống sử dụng Google Sheets làm cơ sở dữ liệu miễn phí và Google Apps Script làm Backend API.
 
 1. **Tạo Google Sheet:** Tạo một bảng tính mới để lưu trữ nhật ký.
-   * 👉 [🔗 Tham khảo mẫu Cơ sở dữ liệu Google Sheet của dự án tại đây](https://docs.google.com/spreadsheets/d/1F7vB3ncXRynr4YONkt-7NzRndev7CFtMYesXiH4w0Is/edit?usp=sharingx)
+   * 👉 [🔗 Cơ sở dữ liệu Google Sheet của dự án](https://docs.google.com/spreadsheets/d/1F7vB3ncXRynr4YONkt-7NzRndev7CFtMYesXiH4w0Is/edit?usp=sharingx)
 2. **Triển khai Script:** * Mở `Tiện ích mở rộng` -> `Apps Script`.
    * Copy nội dung file `Web_App_Script/Code.gs` và `Index.html` dán vào.
    * Chọn `Phát triển` -> `Triển khai mới` -> Chọn loại `Ứng dụng Web` (Quyền truy cập: Bất kỳ ai).
    * **Lưu lại đường dẫn Web App URL** để nạp vào ESP32.
+   * 👉 [🔗 Đường link Web Dashboard của dự án]([https://docs.google.com/spreadsheets/d/1F7vB3ncXRynr4YONkt-7NzRndev7CFtMYesXiH4w0Is/edit?usp=sharingx](https://script.google.com/macros/s/AKfycbyWvpzWuLJ_vV84Uc3rvG5cOGRKCblE85hYOkTFurOL_UT4WP3MSYsnFkm6WfHzJIYH/exec))
 
 ---
 
