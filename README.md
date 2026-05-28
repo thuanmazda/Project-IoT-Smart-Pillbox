@@ -48,7 +48,7 @@ IoT-Smart-Pillbox/
 
 > **📸 Hình ảnh mạch thực tế:**
 > 
-> ![Mô hình hoàn thiện](thay_link_anh_mach_thuc_te_cua_ban_vao_day.jpg)
+> ![Mô hình hoàn thiện](Docs/Source_Code_LaTeX/mo_hinh_mat_truoc.jpg)
 
 ---
 
@@ -92,7 +92,7 @@ Bước 2: Cài đặt lịch trình qua Web Dashboard
 
 > **📸 Giao diện Trang quản trị Web:**
 > 
-> ![Giao diện trang web](thay_link_anh_giao_dien_web_cua_ban_vao_day.jpg)
+> ![Giao diện trang web](Docs/Source_Code_LaTeX/dashboard_timeline.png)
 
 Bước 3: Nhận thông báo qua Telegram
   * Khi đến giờ, hộp thuốc sẽ phát tiếng bíp và sáng màn hình.
@@ -100,7 +100,7 @@ Bước 3: Nhận thông báo qua Telegram
 
 > **📸 Thông báo Telegram Bot:**
 > 
-> ![Thông báo Telegram](thay_link_anh_thong_bao_telegram_cua_ban_vao_day.jpg)
+> ![Thông báo Telegram](Docs/Source_Code_LaTeX/test_uong_dung_gio2.png)
 
 ---
 
