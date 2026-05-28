@@ -1,6 +1,6 @@
 # 💊 IoT Smart Pillbox - Hộp Thuốc Thông Minh
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![License](https://img.shields.io/badge/license-HCMUT-blue.svg)
 ![Platform](https://img.shields.io/badge/platform-ESP32-green.svg)
 ![Framework](https://img.shields.io/badge/framework-Arduino%20IDE-orange.svg)
 
