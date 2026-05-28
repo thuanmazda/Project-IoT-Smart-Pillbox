@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Smart Pillbox Dashboard</title>
+  <style>
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; margin: 0; padding: 20px; color: #333; }
+    .container { max-width: 800px; margin: auto; }
+    h2 { text-align: center; color: #2c3e50; }
+    .card-row { display: flex; justify-content: space-between; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+    .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); flex: 1; text-align: center; min-width: 150px; }
+    .card h3 { margin: 0 0 10px 0; font-size: 16px; color: #7f8c8d; }
+    .card .number { font-size: 36px; font-weight: bold; color: #3498db; }
+    .settings-panel { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    
+    /* STYLE CHO BỘ BÁO THỨC MỚI */
+    .alarm-card { background: #fdfdfd; border: 1px solid #e0e0e0; padding: 15px; border-radius: 8px; margin-bottom: 15px; text-align: left; }
+    .alarm-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .alarm-time { padding: 8px; font-size: 20px; border: 1px solid #ccc; border-radius: 5px; font-weight: bold; color: #2c3e50; }
+    
+    /* Nút chọn Thứ trong tuần */
+    .days-row { margin-bottom: 12px; }
+    .day-checkbox { display: none; }
+    .day-label { display: inline-block; width: 34px; height: 34px; line-height: 34px; text-align: center; border-radius: 50%; background: #eee; cursor: pointer; margin: 2px; font-size: 13px; font-weight: bold; color: #7f8c8d; transition: 0.2s; user-select: none; }
+    .day-checkbox:checked + .day-label { background: #3498db; color: white; box-shadow: 0 2px 4px rgba(52,152,219,0.4); }
+    
+    .repeat-row { font-size: 14px; color: #555; display: flex; align-items: center; }
+    .repeat-row input { transform: scale(1.2); margin-right: 8px; cursor: pointer; }
+
+    .btn { background-color: #2ecc71; color: white; border: none; padding: 10px 20px; font-size: 15px; border-radius: 5px; cursor: pointer; transition: 0.3s; font-weight: bold; }
+    .btn:hover { background-color: #27ae60; }
+    .btn-remove { background-color: #e74c3c; padding: 6px 12px; font-size: 13px; }
+    .btn-remove:hover { background-color: #c0392b; }
+    #status { text-align: center; margin-top: 15px; font-weight: bold; color: #2ecc71; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>💊 DASHBOARD HỘP THUỐC IOT</h2>
+    
+    <div style="text-align: center; margin-bottom: 20px;">
+  <span id="status-dot" style="height: 15px; width: 15px; background-color: #ccc; border-radius: 50%; display: inline-block; vertical-align: middle;"></span>
+  <span id="status-text" style="font-weight: bold; color: #666; margin-left: 8px; vertical-align: middle;">Đang kiểm tra trạng thái...</span>
+</div>
+
+    <div class="card-row">
+      <div class="card">
+        <h3>HÔM NAY</h3>
+        <div class="number" id="statToday">...</div>
+        <div style="font-size:12px; color:#95a5a6; margin-top:5px">Lần uống thuốc</div>
+        <div id="todayTimes" style="font-size:13px; color:#2ecc71; margin-top:8px; font-weight:bold;"></div>
+        <div id="missedAlert" style="font-size:13px; color:#e74c3c; margin-top:5px; font-weight:bold; display:none;"></div>
+      </div>
+      <div class="card">
+        <h3>TUẦN NÀY</h3>
+        <div class="number" id="statWeek">...</div>
+        <div style="font-size:12px; color:#95a5a6; margin-top:5px">Lần uống thuốc</div>
+      </div>
+      <div class="card">
+        <h3>THÁNG NÀY</h3>
+        <div class="number" id="statMonth">...</div>
+        <div style="font-size:12px; color:#95a5a6; margin-top:5px">Lần uống thuốc</div>
+      </div>
+    </div>
+
+<div class="settings-panel" style="margin-bottom: 20px;">
+  <h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px;">🔍 TRA CỨU LỊCH SỬ</h3>
+  <div style="display: flex; gap: 15px; align-items: flex-end; margin-bottom: 15px; flex-wrap: wrap;">
+    <div style="display: flex; flex-direction: column;">
+      <label style="font-size: 13px; color: #7f8c8d; font-weight: bold; margin-bottom: 5px;">Từ ngày:</label>
+      <input type="date" id="startDate" class="alarm-time" style="margin: 0; flex: none; width: 140px; font-size: 15px;">
+    </div>
+    <div style="display: flex; flex-direction: column;">
+      <label style="font-size: 13px; color: #7f8c8d; font-weight: bold; margin-bottom: 5px;">Đến ngày:</label>
+      <input type="date" id="endDate" class="alarm-time" style="margin: 0; flex: none; width: 140px; font-size: 15px;">
+    </div>
+    <button class="btn" style="height: 42px;" onclick="getHistory()">Xem Lịch Sử</button>
+  </div>
+  <div id="historyResult" style="font-size: 14px; line-height: 1.6; max-height: 400px; overflow-y: auto;">
+    Chọn khoảng thời gian để xem chi tiết tình trạng uống thuốc.
+  </div>
+</div>
+
+    <div class="settings-panel">
+      <h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px;">⏰ CÀI ĐẶT LỊCH UỐNG THUỐC</h3>
+      <p style="font-size: 14px; color: #666;">Chọn giờ và các ngày trong tuần để hộp thuốc phát còi nhắc nhở.</p>
+      
+      <div id="alarmsContainer"></div>
+      
+      <button class="btn" style="background-color: #3498db; margin-top: 10px;" onclick="addAlarmInput()">+ Thêm giờ nhắc nhở</button>
+      <button class="btn" style="margin-top: 10px; float: right;" onclick="saveAlarms()">Lưu Cài Đặt Lên Đám Mây</button>
+      
+      <div style="clear: both;"></div>
+      <div id="status"></div>
+    </div>
+  </div>
+
+  <script>
+    window.onload = function() {
+      google.script.run.withSuccessHandler(updateStats).getDashboardStats();
+      google.script.run.withSuccessHandler(loadAlarms).getAlarmsFromSheet();
+    };
+
+    function updateStats(data) {
+      document.getElementById('statToday').innerText = data.today;
+      document.getElementById('statWeek').innerText = data.week;
+      document.getElementById('statMonth').innerText = data.month;
+
+      // Xử lý hiển thị giờ đã uống
+      var timesStr = data.todayTimes.length > 0 ? "Lúc: " + data.todayTimes.join(", ") : "Chưa uống lần nào";
+      document.getElementById('todayTimes').innerText = timesStr;
+
+      // Xử lý cảnh báo bỏ thuốc
+      var missedEl = document.getElementById('missedAlert');
+      if (data.missedToday > 0) {
+          missedEl.style.display = 'block';
+          missedEl.innerText = "⚠️ Bỏ lỡ " + data.missedToday + " cữ (lúc " + data.missedTodayTimes.join(", ") + ")";
+      } else {
+          missedEl.style.display = 'none';
+      }
+    }
+function getHistory() {
+  var startVal = document.getElementById('startDate').value;
+  var endVal = document.getElementById('endDate').value;
+  
+  if (!startVal || !endVal) return alert("Vui lòng chọn đầy đủ 'Từ ngày' và 'Đến ngày'!");
+  
+  if (new Date(startVal) > new Date(endVal)) {
+    return alert("Lỗi: 'Từ ngày' không thể lớn hơn 'Đến ngày'!");
+  }
+
+  document.getElementById('historyResult').innerHTML = '<span style="color:#3498db; font-weight:bold;">Đang tải dữ liệu và phân tích...</span>';
+  
+  // Gửi 2 chuỗi YYYY-MM-DD thẳng lên Google Apps Script
+  // ... (phần đầu hàm getHistory giữ nguyên) ...
+
+  google.script.run
+    .withSuccessHandler(function(data) {
+      if (!data || Object.keys(data).length === 0) {
+        document.getElementById('historyResult').innerHTML = "<div style='color:#7f8c8d; padding: 10px 0; text-align: center;'>Không có dữ liệu trong khoảng thời gian này.</div>";
+        return;
+      }
+
+    // 1. LẤY DANH SÁCH NGÀY VÀ SẮP XẾP (Cũ nhất lên đầu)
+      var sortedDates = Object.keys(data).sort(function(a, b) {
+        var pA = a.split("/"); // Cắt "DD/MM/YYYY"
+        var pB = b.split("/");
+        var dateA = new Date(pA[2], pA[1] - 1, pA[0]);
+        var dateB = new Date(pB[2], pB[1] - 1, pB[0]);
+        
+        return dateA - dateB; // Sửa dòng này: dateA trừ dateB để xếp Tăng dần
+      });
+
+      // 2. HÀM TÍNH "THỨ" TRONG TUẦN
+      function getDayOfWeek(dateStr) {
+         var p = dateStr.split("/");
+         var d = new Date(p[2], p[1]-1, p[0]);
+         var days = ["Chủ nhật", "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7"];
+         return days[d.getDay()];
+      }
+
+      // 3. VẼ GIAO DIỆN TIMELINE CHUYÊN NGHIỆP
+      var html = "<div style='padding-top: 10px;'>";
+      
+      sortedDates.forEach(function(dateKey) {
+        var dayData = data[dateKey];
+        var thu = getDayOfWeek(dateKey);
+
+        // Code CSS tạo đường thẳng dọc (Timeline)
+        html += `<div style="border-left: 3px solid #3498db; padding-left: 15px; margin-bottom: 20px; position: relative;">`;
+        
+        // Dấu chấm tròn trên Timeline
+        html += `<div style="position: absolute; width: 13px; height: 13px; background: #3498db; border: 3px solid #fff; border-radius: 50%; left: -11px; top: 2px; box-shadow: 0 0 0 1px #3498db;"></div>`;
+        
+        // Hiển thị: Thứ + Ngày tháng
+        html += `<div style="margin-bottom: 8px; color:#2c3e50; font-size: 15px;"><strong>📅 ${thu}, ngày ${dateKey}</strong></div>`;
+        
+        // Khối chứa dữ liệu uống thuốc bên trong Timeline
+        html += `<div style="background: #fdfdfd; padding: 12px; border-radius: 6px; border: 1px solid #eee; box-shadow: 0 1px 3px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 8px;">`;
+
+        if (dayData.uong.length > 0) {
+          html += `<div style="color: #27ae60; font-size: 14px;">
+                     <span style="background:#e8f8f5; padding: 4px 8px; border-radius: 6px; border: 1px solid #a3e4d7; display: inline-block;">
+                        ✔️ <b>Đã uống:</b> ${dayData.uong.join(", ")}
+                     </span>
+                   </div>`;
+        }
+        if (dayData.bo.length > 0) {
+          html += `<div style="color: #c0392b; font-size: 14px;">
+                     <span style="background:#fdedec; padding: 4px 8px; border-radius: 6px; border: 1px solid #f5b7b1; display: inline-block;">
+                        ❌ <b>Bỏ cữ:</b> ${dayData.bo.join(", ")}
+                     </span>
+                   </div>`;
+        }
+        if (dayData.uong.length === 0 && dayData.bo.length === 0) {
+          html += `<div style="color: #95a5a6; font-size: 14px; padding: 4px 0;">➖ Không có tương tác mở/đóng nắp.</div>`;
+        }
+        
+        html += `</div></div>`; // Đóng khối Timeline
+      });
+
+      html += "</div>";
+      document.getElementById('historyResult').innerHTML = html;
+    })
+    .withFailureHandler(function(err) {
+      document.getElementById('historyResult').innerHTML = '<span style="color:#e74c3c">❌ LỖI: ' + err.message + '</span>';
+    })
+    .getLogsByDateRange(startVal, endVal);
+}
+    function loadAlarms(alarms) {
+      document.getElementById('alarmsContainer').innerHTML = '';
+      if(alarms.length === 0) {
+        addAlarmInput(); 
+      } else {
+        alarms.forEach(function(alarmData) { addAlarmInput(alarmData); });
+      }
+    }
+
+    // Hàm tạo khối giao diện báo thức
+    function addAlarmInput(alarmData) {
+      var obj = { time: "08:00", days: [1,2,3,4,5,6,0], repeat: true }; // Mặc định báo mỗi ngày
+      
+      if (alarmData) {
+         try { 
+             obj = JSON.parse(alarmData); 
+         } catch(e) { 
+             obj.time = alarmData; // Tương thích ngược với định dạng cũ
+         }
+      }
+
+      var container = document.getElementById('alarmsContainer');
+      var uniqueId = 'alarm_' + Math.random().toString(36).substr(2, 9);
+      
+      var card = document.createElement('div');
+      card.className = 'alarm-card';
+      
+      // Render HTML cho từng báo thức
+      var html = `
+        <div class="alarm-header">
+          <input type="time" class="a-time" value="${obj.time}">
+          <button class="btn btn-remove" onclick="this.parentElement.parentElement.remove()">Xóa</button>
+        </div>
+        <div class="days-row">
+      `;
+      
+      // Render 7 nút chọn ngày
+      var daysMap = [ {val: 1, label: 'T2'}, {val: 2, label: 'T3'}, {val: 3, label: 'T4'}, 
+                      {val: 4, label: 'T5'}, {val: 5, label: 'T6'}, {val: 6, label: 'T7'}, {val: 0, label: 'CN'} ];
+      
+      daysMap.forEach(function(d) {
+        var isChecked = obj.days.includes(d.val) ? "checked" : "";
+        var cbId = uniqueId + '_d' + d.val;
+        html += `
+          <input type="checkbox" id="${cbId}" class="day-checkbox" value="${d.val}" ${isChecked}>
+          <label for="${cbId}" class="day-label">${d.label}</label>
+        `;
+      });
+
+      var isRepeat = obj.repeat ? "checked" : "";
+      html += `
+        </div>
+        <div class="repeat-row">
+          <input type="checkbox" id="${uniqueId}_rep" class="a-repeat" ${isRepeat}>
+          <label for="${uniqueId}_rep">Lặp lại lịch này hằng tuần</label>
+        </div>
+      `;
+      
+      card.innerHTML = html;
+      container.appendChild(card);
+    }
+
+    // Đóng gói dữ liệu thành JSON và gửi lên Google Sheets
+    function saveAlarms() {
+      var alarmCards = document.querySelectorAll('.alarm-card');
+      var alarmsArray = [];
+      
+      alarmCards.forEach(function(card) {
+        var time = card.querySelector('.a-time').value;
+        var repeat = card.querySelector('.a-repeat').checked;
+        var dayCheckboxes = card.querySelectorAll('.day-checkbox:checked');
+        var days = [];
+        dayCheckboxes.forEach(function(cb) { days.push(parseInt(cb.value)); });
+
+        if(time && days.length > 0) {
+           var alarmObj = { time: time, days: days, repeat: repeat };
+           alarmsArray.push(JSON.stringify(alarmObj)); // Ép thành chuỗi JSON
+        }
+      });
+      
+      if(alarmsArray.length === 0) {
+         alert("Vui lòng chọn ít nhất 1 ngày cho báo thức!");
+         return;
+      }
+
+      document.getElementById('status').innerText = "Đang lưu...";
+      document.getElementById('status').style.color = "#f39c12";
+      
+      google.script.run.withSuccessHandler(function(res) {
+        document.getElementById('status').innerText = "✅ " + res;
+        document.getElementById('status').style.color = "#2ecc71";
+        setTimeout(() => { document.getElementById('status').innerText = ""; }, 3000);
+      }).saveAlarmsToSheet(alarmsArray);
+    }
+function checkDeviceStatus() {
+  // Thay thế fetch bằng hàm native của Google để chống lỗi CORS
+  google.script.run
+    .withSuccessHandler(function(status) {
+      var dot = document.getElementById("status-dot");
+      var text = document.getElementById("status-text");
+      
+      if (status === "ONLINE") {
+        dot.style.backgroundColor = "#28a745"; 
+        text.style.color = "#28a745";
+        text.innerText = "Thiết bị đang hoạt động (Đã kết nối)";
+      } else if (status === "OFFLINE" || status === "OFFLINE_NO_DATA") {
+        dot.style.backgroundColor = "#dc3545"; 
+        text.style.color = "#dc3545";
+        text.innerText = "Mất kết nối với hộp thuốc!";
+      } else if (status === "ERROR_NO_SHEET") {
+        dot.style.backgroundColor = "#ffc107"; // Màu vàng cảnh báo
+        text.style.color = "#ffc107";
+        text.innerText = "Lỗi: Chưa tạo Trang tính tên là 'CaiDat'!";
+      }
+    })
+    .withFailureHandler(function(error) {
+      document.getElementById("status-text").innerText = "Lỗi đường truyền...";
+    })
+    .checkStatusFromServer(); // Gọi thẳng hàm ở file Code.gs
+}
+
+// Chạy lần đầu khi mở web
+checkDeviceStatus();
+// Tự động lặp lại mỗi 30 giây
+setInterval(checkDeviceStatus, 30000);
+    
+  </script>
+</body>
+</html>
